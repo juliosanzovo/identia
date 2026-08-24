@@ -12,7 +12,7 @@
 
 Console interno que automatiza cruzamento cadastral, análise visual de documentos e parecer preliminar de risco — com decisão final sempre do analista humano e trilha completa de auditoria.
 
-[Funcionalidades](#-funcionalidades) · [Instalação](#-instalação) · [Configuração](#%EF%B8%8F-configuração) · [Uso](#-uso) · [API](#-api) · [Arquitetura](#%EF%B8%8F-arquitetura)
+[Funcionalidades](#funcionalidades) · [Instalação](#instalação) · [Configuração](#configuração) · [Uso](#uso) · [API](#api) · [Arquitetura](#arquitetura)
 
 </div>
 
@@ -125,7 +125,7 @@ Copie `.env.example` para `.env.local` e preencha:
 | `HUB_API_BASE_URL` | Não | URL base do Hub |
 | `HUB_REQUEST_TIMEOUT_MS` | Não | Timeout em ms (padrão: `60000`) |
 | `GEMINI_API_KEY` | Sim* | Chave Google Gemini |
-| `GEMINI_MODEL` | Sim* | Modelo Gemini (padrão: `gemini-3.6-flash`) |
+| `GEMINI_MODEL` | Não | Modelo Gemini (padrão: `gemini-2.5-flash`) |
 | `KYC_ANALYZER_USE_GEMINI` | Não | Usa Gemini no parecer (padrão: `true`) |
 
 \* Não obrigatória se `USE_MOCKS=true`
