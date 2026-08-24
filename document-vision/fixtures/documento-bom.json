@@ -1,0 +1,13 @@
+{
+  "tipo_documento_detectado": "RG",
+  "qualidade_imagem": "boa",
+  "motivo_qualidade": "Imagem nítida, boa iluminação e documento inteiro visível.",
+  "indicios_de_manipulacao": [],
+  "dados_extraidos": {
+    "nome": "Maria Silva Santos",
+    "numero": "529.982.247-25",
+    "datas": ["1985-03-12", "2019-06-15"]
+  },
+  "confianca": 92,
+  "observacoes_para_analista": "Documento legível. Campos principais extraídos com alta confiança. Sem indícios de foto de tela ou edição."
+}

@@ -1,0 +1,45 @@
+{
+  "cpf": {
+    "52998224725": {
+      "cpf": "529.982.247-25",
+      "nome": "Maria Silva Santos",
+      "dataNascimento": "1985-03-12",
+      "situacao": "Regular",
+      "endereco": {
+        "logradouro": "Rua das Flores",
+        "numero": "120",
+        "complemento": "Apto 42",
+        "bairro": "Centro",
+        "cidade": "São Paulo",
+        "uf": "SP",
+        "cep": "01310-100"
+      }
+    }
+  },
+  "cnpj": {
+    "11444777000161": {
+      "cnpj": "11.444.777/0001-61",
+      "razaoSocial": "Tech Solutions Ltda",
+      "nomeFantasia": "TechSol",
+      "situacao": "Ativa",
+      "dataAbertura": "2018-05-20",
+      "endereco": {
+        "logradouro": "Av. Paulista",
+        "numero": "1000",
+        "bairro": "Bela Vista",
+        "cidade": "São Paulo",
+        "uf": "SP",
+        "cep": "01310-100"
+      }
+    }
+  },
+  "cep": {
+    "01310100": {
+      "cep": "01310-100",
+      "logradouro": "Avenida Paulista",
+      "bairro": "Bela Vista",
+      "cidade": "São Paulo",
+      "uf": "SP"
+    }
+  }
+}

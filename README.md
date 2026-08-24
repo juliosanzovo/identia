@@ -1,2 +1,266 @@
-# identia
-Console interno de KYC com IA: consulta cadastral, análise de documentos e parecer de risco — decisão final do analista com trilha de auditoria.
+<div align="center">
+
+# Identia
+
+**Console de análise KYC com IA para operações de compliance**
+
+[![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06B6D4?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Gemini](https://img.shields.io/badge/Google-Gemini-4285F4?logo=google&logoColor=white)](https://ai.google.dev/)
+
+Console interno que automatiza cruzamento cadastral, análise visual de documentos e parecer preliminar de risco — com decisão final sempre do analista humano e trilha completa de auditoria.
+
+[Funcionalidades](#-funcionalidades) · [Instalação](#-instalação) · [Configuração](#%EF%B8%8F-configuração) · [Uso](#-uso) · [API](#-api) · [Arquitetura](#%EF%B8%8F-arquitetura)
+
+</div>
+
+---
+
+## Sobre
+
+**Identia** é uma plataforma de KYC (*Know Your Customer*) voltada a mesas de compliance. O analista abre casos com CPF ou CNPJ e foto do documento; o sistema consulta bases cadastrais, extrai dados via visão computacional, gera parecer de risco e registra cada etapa para auditoria.
+
+> **Princípio central:** a IA **recomenda** — a **decisão final é sempre do analista**.
+
+---
+
+## Funcionalidades
+
+- **Fila de casos** com status operacional e decisão registrada
+- **Consulta cadastral** de CPF/CNPJ via Hub do Desenvolvedor
+- **Análise visual** de RG, CNH e similares com Google Gemini
+- **Parecer de risco** com score, sinais, justificativa e recomendação
+- **Decisão do analista** — aprovar, reprovar ou solicitar revisão
+- **Auditoria** com timeline de eventos por caso
+- **Fallback resiliente** — degrada para regras locais se a API de IA atingir limite
+
+---
+
+## Fluxo
+
+```mermaid
+flowchart LR
+    A[Analista] --> B[Novo caso]
+    B --> C[Hub Cadastral]
+    B --> D[Upload documento]
+    D --> E[Visão Gemini]
+    C --> F[Parecer de risco]
+    E --> F
+    F --> G[Decisão analista]
+    G --> H[Auditoria]
+```
+
+| Etapa | Descrição |
+|-------|-----------|
+| 1 | Analista informa CPF/CNPJ e envia foto do documento |
+| 2 | Consulta cadastral retorna nome, situação e datas |
+| 3 | Visão computacional extrai OCR e detecta manipulação |
+| 4 | Motor de risco cruza cadastro × documento |
+| 5 | Analista registra decisão final |
+| 6 | Eventos ficam na trilha de auditoria |
+
+---
+
+## Stack
+
+| Camada | Tecnologia |
+|--------|------------|
+| Frontend | Next.js 14 · React 18 · TypeScript · Tailwind CSS |
+| Backend | API Routes (Next.js) |
+| IA | Google Gemini |
+| Cadastro | Hub do Desenvolvedor |
+| Validação | Zod |
+| Imagens | Sharp |
+| Persistência | JSON local |
+
+---
+
+## Instalação
+
+### Pré-requisitos
+
+- Node.js 20+
+- npm
+
+### Passos
+
+```bash
+git clone https://github.com/juliosanzovo/identia.git
+cd identia
+npm install
+cp .env.example .env.local
+```
+
+Edite `.env.local` com suas credenciais.
+
+> **Importante:** nunca commite `.env.local` ou arquivos em `data/uploads/`.
+
+### Desenvolvimento
+
+```bash
+npm run dev
+```
+
+Acesse **http://localhost:3000/console**
+
+### Produção
+
+```bash
+npm run build
+npm start
+```
+
+---
+
+## Configuração
+
+Copie `.env.example` para `.env.local` e preencha:
+
+| Variável | Obrigatória | Descrição |
+|----------|:-----------:|-----------|
+| `USE_MOCKS` | Não | `true` = execução local sem APIs externas |
+| `HUBDEV_API_KEY` | Sim* | Chave Hub do Desenvolvedor |
+| `HUB_API_BASE_URL` | Não | URL base do Hub |
+| `HUB_REQUEST_TIMEOUT_MS` | Não | Timeout em ms (padrão: `60000`) |
+| `GEMINI_API_KEY` | Sim* | Chave Google Gemini |
+| `GEMINI_MODEL` | Não | Modelo Gemini (padrão: `gemini-2.5-flash`) |
+| `KYC_ANALYZER_USE_GEMINI` | Não | Usa Gemini no parecer (padrão: `true`) |
+
+\* Não obrigatória se `USE_MOCKS=true`
+
+---
+
+## Uso
+
+### Fluxo do analista
+
+1. Clique em **Novo caso** na fila lateral
+2. Selecione **CPF** ou **CNPJ**, informe o número e faça upload da foto
+3. A análise inicia automaticamente após a criação
+4. Revise os painéis **Cadastral**, **Visão documental** e **Parecer de risco**
+5. Registre a decisão: **Aprovar**, **Reprovar** ou **Solicitar revisão**
+6. Consulte a **auditoria** na coluna direita
+
+Para reprocessar um caso, use **Reanalisar** no workspace.
+
+### Interface
+
+| Área | Função |
+|------|--------|
+| Fila | Lista de casos com status e decisão |
+| Workspace | Formulário, painéis de análise e ações |
+| Auditoria | Timeline + barra de decisão |
+
+Layout em três colunas no desktop; abas no mobile.
+
+---
+
+## API
+
+| Método | Rota | Descrição |
+|--------|------|-----------|
+| `GET` | `/api/health` | Health check |
+| `GET` | `/api/cases` | Lista resumida de casos |
+| `POST` | `/api/cases` | Cria caso (`multipart/form-data`) |
+| `GET` | `/api/cases/:id` | Detalhe do caso |
+| `POST` | `/api/cases/:id/analyze` | Executa pipeline KYC |
+| `POST` | `/api/cases/:id/decide` | Registra decisão do analista |
+| `GET` | `/api/cases/:id/image` | Imagem do documento |
+| `GET` | `/api/audit?caseId=:id` | Auditoria do caso |
+
+**Criar caso** — campos do `multipart/form-data`:
+
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| `documentType` | `cpf` \| `cnpj` | Tipo do documento |
+| `document` | string | CPF ou CNPJ |
+| `image` | file | Foto do documento |
+
+---
+
+## Estrutura do projeto
+
+```
+identia/
+├── src/
+│   ├── app/                  # App Router + API Routes
+│   ├── components/console/   # UI do console
+│   ├── lib/store/            # Persistência JSON
+│   └── types/
+├── hub-do-desenvolvedor/      # Cliente cadastral (CPF, CNPJ, CEP)
+├── document-vision/          # Análise visual de documentos
+├── kyc-analyzer/             # Parecer de risco
+└── data/
+    └── uploads/              # Imagens (runtime, não versionado)
+```
+
+Cada módulo de domínio é independente, com clientes real/offline, schemas Zod e tipos próprios, importados via path aliases no `tsconfig.json`.
+
+---
+
+## Arquitetura
+
+### Pipeline (`POST /api/cases/:id/analyze`)
+
+| # | Módulo | Responsabilidade |
+|---|--------|------------------|
+| 1 | `hub-do-desenvolvedor` | Valida e consulta CPF/CNPJ |
+| 2 | `document-vision` | Pré-processa imagem, chama Gemini, valida JSON |
+| 3 | `kyc-analyzer` | Cruza dados, aplica regras e/ou LLM |
+| 4 | `src/lib/store` | Persiste resultado e auditoria |
+
+### Sinais de risco avaliados
+
+- Situação cadastral irregular
+- Divergência de nome ou número entre cadastro e documento
+- Indícios de manipulação digital
+- Baixa qualidade ou confiança na extração OCR
+- Empresa com menos de 6 meses (CNPJ)
+- Possível foto de tela
+
+### Decisões de design
+
+- **Contratos tipados com Zod** — saída de IA validada antes de entrar no fluxo
+- **Fallback em camadas** — quota Gemini esgotada → regras locais com confiança reduzida
+- **Human-in-the-loop** — parecer nunca aprova automaticamente; só o analista decide
+- **Persistência file-based** — deploy simples sem banco de dados
+
+---
+
+## Scripts
+
+| Comando | Descrição |
+|---------|-----------|
+| `npm run dev` | Servidor de desenvolvimento |
+| `npm run build` | Build de produção |
+| `npm start` | Servidor de produção |
+| `npm run lint` | ESLint |
+
+---
+
+## Segurança
+
+Arquivos **nunca versionados** (`.gitignore`):
+
+| Arquivo / pasta | Motivo |
+|-----------------|--------|
+| `.env.local` | Chaves de API |
+| `data/cases.json` | Dados operacionais com PII |
+| `data/audit.json` | Trilha com dados sensíveis |
+| `data/hub-cache.json` | Cache cadastral |
+| `data/uploads/*` | Imagens de documentos |
+| `.next/` | Build cache |
+
+**Antes de publicar no GitHub:**
+
+1. Confirme com `git status` que `.env.local` **não aparece**
+2. Não faça upload de imagens reais de documentos
+3. Rotacione chaves de API se já foram expostas
+
+---
+
+## Licença
+
+Projeto privado. Todos os direitos reservados.

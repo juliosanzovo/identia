@@ -1,0 +1,13 @@
+{
+  "tipo_documento_detectado": "RG",
+  "qualidade_imagem": "ruim",
+  "motivo_qualidade": "Imagem desfocada e com baixo contraste; bordas do documento parcialmente ilegíveis.",
+  "indicios_de_manipulacao": [],
+  "dados_extraidos": {
+    "nome": "Maria Silva Sa——",
+    "numero": null,
+    "datas": ["1985-03-12"]
+  },
+  "confianca": 38,
+  "observacoes_para_analista": "Qualidade insuficiente para validação automática confiável. Solicitar novo envio com foto nítida, sem reflexo e com documento plano."
+}

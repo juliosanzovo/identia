@@ -1,0 +1,17 @@
+{
+  "tipo_documento_detectado": "CNH",
+  "qualidade_imagem": "regular",
+  "motivo_qualidade": "Resolução aceitável, porém padrões típicos de captura de tela detectados.",
+  "indicios_de_manipulacao": [
+    "Bordas retas artificiais ao redor do documento",
+    "Padrão de moiré compatível com foto de monitor",
+    "Barra de status/reflexo de interface visível na margem superior"
+  ],
+  "dados_extraidos": {
+    "nome": "João Pedro Oliveira",
+    "numero": "123.456.789-00",
+    "datas": ["1990-07-22", "2028-11-30"]
+  },
+  "confianca": 45,
+  "observacoes_para_analista": "Forte indício de foto de tela, não de captura direta do documento físico. Recomenda-se revisão manual ou novo envio com câmera."
+}

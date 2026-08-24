@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: #0a0e16;
+  --panel: #131a26;
+  --hairline: #232c3d;
+  --paper: #e7eaf2;
+  --slate: #808a9e;
+  --seal: #c99a46;
+  --risk-low: #4f9868;
+  --risk-medium: #c98a3b;
+  --risk-high: #b84c42;
+}
+
+body {
+  color: var(--paper);
+  background: var(--ink);
+  font-family: var(--font-ibm-plex-sans), sans-serif;
+}
+
+@layer utilities {
+  .panel-surface {
+    @apply rounded-lg border border-hairline bg-panel;
+  }
+
+  .seal-focus {
+    @apply transition-shadow duration-200 focus-visible:outline-none focus-visible:shadow-seal;
+  }
+
+  .panel-hover-glow {
+    @apply transition-shadow duration-200 hover:shadow-seal-hover;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

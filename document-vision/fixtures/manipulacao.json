@@ -1,0 +1,17 @@
+{
+  "tipo_documento_detectado": "RG",
+  "qualidade_imagem": "regular",
+  "motivo_qualidade": "Documento legível, mas com inconsistências visuais em áreas de texto.",
+  "indicios_de_manipulacao": [
+    "Discrepância de fonte no campo de nome",
+    "Artefatos de clonagem na região da foto",
+    "Sombras inconsistentes entre campos adjacentes"
+  ],
+  "dados_extraidos": {
+    "nome": "Carlos Eduardo Lima",
+    "numero": "987.654.321-00",
+    "datas": ["1978-01-05", "2020-03-10"]
+  },
+  "confianca": 52,
+  "observacoes_para_analista": "Indícios visuais de possível edição digital. Cruzar dados extraídos com cadastro e solicitar documento original se necessário."
+}
