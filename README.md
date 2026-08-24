@@ -277,6 +277,35 @@ Arquivos **nunca versionados** (`.gitignore`):
 
 ---
 
+
+## Status do projeto
+
+> **Projeto descontinuado.** O desenvolvimento ativo do Identia foi encerrado e o repositório é mantido principalmente como projeto de portfólio, estudo e referência técnica.
+>
+> Apesar de descontinuado, o projeto pode servir como **base para uma implementação real em produção**, caso uma empresa tenha interesse em continuar seu desenvolvimento, adaptar a arquitetura e realizar as adequações necessárias ao seu ambiente, processos e requisitos de compliance.
+>
+> A versão atual **não deve ser considerada pronta para produção sem uma etapa de hardening, revisão de arquitetura, segurança, infraestrutura e conformidade**.
+
+### Possíveis evoluções
+
+Há bastante espaço para evolução do projeto. Algumas melhorias que poderiam ser implementadas em uma continuação incluem:
+
+- **Agente de IA especializado:** opcionalmente treinar ou configurar um agente dedicado exclusivamente às tarefas de KYC, análise documental e apoio ao analista.
+- **Melhoria de contexto para o modelo:** aprimorar a seleção, estrutura e quantidade de informações enviadas ao modelo para aumentar a consistência e a qualidade das análises.
+- **Segurança e hardening:** proteção contra prompt injection, abuso das APIs, upload de arquivos maliciosos, exposição de dados, ataques à aplicação, rate limiting, autenticação/autorização mais robustas e demais vetores relevantes.
+- **Banco de dados online:** substituir a persistência local em JSON por PostgreSQL, MySQL ou outro banco gerenciado, com backups, índices, controle de acesso e estratégia de retenção.
+- **Infraestrutura de produção:** armazenamento de documentos em object storage, filas para processamento assíncrono, observabilidade, logs centralizados, monitoramento e recuperação de falhas.
+- **Escalabilidade:** adaptar o pipeline para múltiplos analistas, maior volume de casos e processamento concorrente.
+- **Auditoria e governança:** ampliar a trilha de auditoria, versionamento das análises, rastreabilidade das decisões e controles de acesso por função.
+- **Qualidade da IA:** avaliação sistemática dos resultados, testes com datasets controlados, métricas de precisão e revisão humana contínua.
+- **Conformidade:** adequação dos fluxos e da retenção de dados aos requisitos legais, regulatórios e de privacidade aplicáveis à empresa que eventualmente utilize a solução.
+
+Esses pontos representam caminhos de evolução e **não fazem parte da implementação atual**.
+
+---
+
 ## Licença
 
-Projeto privado. Todos os direitos reservados.
+Projeto descontinuado e usado para fins academicos. Todos os direitos reservados.
+
+O código pode ser utilizado como base para estudos, fork ou continuidade do desenvolvimento por uma empresa interessada, desde que sejam observadas as condições aplicáveis ao uso e que a solução passe pelas adequações necessárias antes de qualquer utilização em produção.
