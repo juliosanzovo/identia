@@ -77,6 +77,22 @@ flowchart LR
 
 ---
 
+## 📸 Screenshots
+
+> **Demonstração:** as informações exibidas nas imagens abaixo são **100% fictícias e foram utilizadas apenas para demonstração da interface**. Nenhum dado pessoal ou cadastral real é utilizado nas screenshots.
+
+### Console de análise
+
+![Identia — Console de análise](docs/screenshots/console.png)
+
+### Análise de caso
+
+![Identia — Análise de caso](docs/screenshots/case-analysis.png)
+
+> Os dados, documentos, nomes, números e resultados apresentados nas screenshots são fictícios e não representam pessoas ou empresas reais.
+
+---
+
 ## Instalação
 
 ### Pré-requisitos
